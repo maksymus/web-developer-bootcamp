@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery methods</title>
+    <script type="text/javascript" src="lib/js/jquery-3.3.1.js"></script>
+</head>
+<body>
+    <h1>jQuery Methods Demo Page</h1>
+
+    <input type="text" placeholder="Your Name">
+
+    <ul>
+        <li>Skittles</li>
+        <li>Twix</li>
+        <li>Sinkers</li>
+    </ul>
+
+    <a href="http://www.google.com">Google</a>
+
+    <script type="text/javascript">
+        console.log('input: ', $('input').val());
+        console.log('ul: ', $('ul').text());
+        console.log('ul: ', $('ul').html());
+        console.log('ul: ', $('a').attr('href'));
+        $('a').attr('href', 'http://www.yahoo.com');
+
+        $('input').val('John Doe');
+    </script>
+</body>
+</html>

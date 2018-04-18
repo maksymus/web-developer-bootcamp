@@ -1,0 +1,31 @@
+body {
+    padding-top: 80px;
+}
+
+.bg-navbar {
+    background-color: #2c3e50;
+}
+
+img {
+    width: 100%;
+}
+
+[class*="col-"]:not(:last-child){
+    margin-bottom: 20px;
+}
+
+.jumbotron {
+    color: #2c3e50;
+    padding-right: 60px;
+    padding-left: 60px;
+}
+
+.jumbotron h1 {
+    font-size: 63px;
+}
+
+.jumbotron p {
+    margin-bottom: 15px;
+    font-size: 21px;
+    font-weight: 200;
+}
