@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Circles</title>
+
+    <link rel="stylesheet" href="css/circles.css">
+
+    <script type="text/javascript" src="lib/js/paper-full.min.js"></script>
+    <script type="text/javascript" src="lib/js/howler.min.js"></script>
+    <script type="text/javascript" src="js/data.js"></script>
+
+    <script type="text/paperscript" canvas="canvas">
+        var defaultSound = new Howl({
+            src: ['res/sounds/corona.mp3']
+        })
+
+        var circles = [];
+
+        function onKeyDown(event) {
+            var randomPoint = new Point(view.size.width, view.size.height) * Point.random();
+            var myCircle = new Path.Circle(randomPoint, 500);
+
+            var data = keyData[event.key];
+
+            if (data != null) {
+                myCircle.fillColor = data.color;
+                data.sound.play();
+            } else {
+                myCircle.fillColor = 'green';
+                defaultSound.play();
+            }
+
+            circles.push(myCircle);
+        }
+
+        function onFrame() {
+            for (var i = 0; i < circles.length; i++) {
+                circles[i].fillColor.hue += 10;
+                circles[i].scale(0.4);
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="canvas" resize></canvas>
+</body>
+</html>
