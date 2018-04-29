@@ -1,0 +1,10 @@
+<% include partials/header.ejs %>
+
+<h4>The answer to the ultimate question of life, the universe and everything is: <bold><%= answer %></bold></h4>
+<% if (answer == '42') { %>
+    <h4 style="color: green">That's correct</h4>
+<% } else { %>
+    <h4 style="color: red">Wrong answer</h4>
+<% } %>
+
+<% include partials/footer.ejs %>

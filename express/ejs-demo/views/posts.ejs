@@ -1,0 +1,9 @@
+<% include partials/header.ejs %>
+<h1>Posts</h1>
+<ul>
+    <% for (var i = 0; i < posts.length; i++) { %>
+        <li><b><%= posts[i].title %></b> by <%= posts[i].author %></li>
+    <% } %>
+</ul>
+
+<% include partials/footer.ejs %>
