@@ -6,4 +6,14 @@
     <% } %>
 </ul>
 
+<form action="/posts/add" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title">
+
+    <button type="submit">Add</button>
+</form>
+
 <% include partials/footer.ejs %>
