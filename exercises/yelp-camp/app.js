@@ -9,11 +9,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 // mongodb://web-dev:Welcome@123@ds115740.mlab.com:15740/yelp-camp
 
 var campgrounds = [
-    {name: "Paradise Campground", image: "img/paradise_campground.jpg"},
-    {name: "Difficult Campground", image: "img/difficult_campground.jpg"},
-    {name: "White River", image: "img/white_river.jpg"},
-    {name: "Shady Brook Campground", image: "img/shady_brooks_campground.jpg"},
-    {name: "The Lantern Resort", image: "img/lantern_resort_campground.jpg"},
+    {name: "Paradise Campground", image: "/img/paradise_campground.jpg"},
+    {name: "Difficult Campground", image: "/img/difficult_campground.jpg"},
+    {name: "White River", image: "/img/white_river.jpg"},
+    {name: "Shady Brook Campground", image: "/img/shady_brooks_campground.jpg"},
+    {name: "The Lantern Resort", image: "/img/lantern_resort_campground.jpg"},
 ];
 
 app.get("/", function (req, res) {

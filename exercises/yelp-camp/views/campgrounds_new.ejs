@@ -1,14 +1,24 @@
 <% include partials/header.ejs %>
 
-<h1>Create a New Campground</h1>
-<form action="/campground" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" placeholder="Name">
+    <div class="container">
+        <div style="width: 50%; margin: 0px auto">
+            <h1>Create a New Campground</h1>
+            <form action="/campground" method="post">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Name" class="form-control">
+                </div>
 
-    <label for="image">Image:</label>
-    <input type="text" id="image" name="image" placeholder="Image">
+                <div class="form-group">
+                    <input type="text" id="image" name="image" placeholder="Image" class="form-control">
+                </div>
 
-    <button type="submit">Submit</button>
-</form>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+
+            <a href="/campgrounds">Go Back</a>
+        </div>
+    </div>
 
 <% include partials/footer.ejs %>
