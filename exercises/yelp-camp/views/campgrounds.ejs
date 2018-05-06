@@ -1,0 +1,11 @@
+<% include partials/header.ejs %>
+<h1>Campgrounds</h1>
+<ul>
+    <% campgrounds.forEach(function(campground) { %>
+        <div>
+            <h4><%= campground.name %></h4>
+            <img src="<%= campground.image %>" alt="<%= campground.image %>">
+        </div>
+    <% }); %>
+</ul>
+<% include partials/footer.ejs %>
