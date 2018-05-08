@@ -1,12 +1,22 @@
 var express = require("express");
 var ejs = require("ejs");
 var bodyParser = require("body-parser");
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:32772/yelp-camp');
 
 var app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-// mongodb://web-dev:Welcome@123@ds115740.mlab.com:15740/yelp-camp
+// schema
+var campgroundSchema = mongoose.Schema({
+    name: String,
+    image: String,
+    description: String
+});
+
+var Campground = mongoose.model("Campground", campgroundSchema);
 
 var campgrounds = [
     {name: "Paradise Campground", image: "/img/paradise_campground.jpg"},
@@ -16,26 +26,68 @@ var campgrounds = [
     {name: "The Lantern Resort", image: "/img/lantern_resort_campground.jpg"},
 ];
 
+// campgrounds.forEach(function (value) {
+//     var cg = new Campground({name: value.name, image: value.image});
+//     cg.save(function (err, res) {
+//         if (err) {
+//             console.log("Error:", err);
+//         } else {
+//             console.log("Campground saved ", res);
+//         }
+//     })
+// })
+
 app.get("/", function (req, res) {
     res.render("landing.ejs");
 });
 
 app.get("/campgrounds", function (req, res) {
-    res.render("campgrounds.ejs", {campgrounds: campgrounds});
+    Campground.find({}, function (err, campgrounds) {
+        if (err) {
+            console.log("error:", err);
+        } else {
+            res.render("campgrounds.ejs", {campgrounds: campgrounds});
+        }
+    });
 });
 
 app.get("/campgrounds/new", function (req, res) {
     res.render("campgrounds_new.ejs");
 });
 
-app.post("/campground", function (req, res) {
+app.get("/campgrounds/:id", function (req, res) {
+    Campground.findOne({_id: req.params.id}, function (err, campground) {
+        if (err) {
+            console.log("error:", err);
+        } else {
+            res.render("campgrounds_show.ejs", {campground: campground});
+        }
+    });
+});
+
+app.post("/campgrounds", function (req, res) {
     var name = req.body.name;
     var image = req.body.image;
 
-    campgrounds.push({name: name, image: image});
-
-    res.redirect("/campgrounds");
+    var cg = new Campground({name: name, image: image});
+    cg.save(function (err, res) {
+        if (err) {
+            console.log("error:", err);
+        } else {
+            res.redirect("/campgrounds");
+        }
+    })
 });
+
+// app.get("/campgrounds/:id", function (req, res) {
+//     Campground.find({id: req.params.id}, function (err, res) {
+//         // if (err) {
+//         //     console.log("error:", err);
+//         // } else {
+//         //     res.send("show page");
+//         // }
+//     });
+// });
 
 app.listen(3000, function () {
     console.log("server is listening");

@@ -1,6 +1,5 @@
 <% include partials/header.ejs %>
 
-
 <div class="container">
     <header class="jumbotron">
         <div class="container">
@@ -15,12 +14,15 @@
     <div class="row text-center" style="display: flex; flex-wrap: wrap;">
         <% campgrounds.forEach(function(campground) { %>
             <div class="col-md-3 col-sm-6">
-                <figure class="figure">
-                    <img class="figure-img img-fluid img-thumbnail" src="<%= campground.image %>" alt="<%= campground.image %>">
-                    <div class="figure-caption"><%= campground.name %></div>
-                </figure>
+                <a href="/campgrounds/<%= campground.id %>">
+                    <figure class="figure">
+                        <img class="figure-img img-fluid img-thumbnail" src="<%= campground.image %>" alt="<%= campground.image %>">
+                        <div class="figure-caption"><%= campground.name %></div>
+                    </figure>
+                </a>
             </div>
         <% }); %>
     </div>
 </div>
+
 <% include partials/footer.ejs %>
