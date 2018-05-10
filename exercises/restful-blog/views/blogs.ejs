@@ -1,0 +1,14 @@
+<% include partials/header.ejs %>
+
+    <% blogs.forEach(function(blog) { %>
+    <div>
+        <!--<a href="/blogs/<%= blog._id %>">-->
+            <h2><%= blog.title %></h2>
+            <img src="<%= blog.image %>" alt="<%= blog.image %>">
+            <span><%= blog.created %></span>
+            <p><%= blog.body %></p>
+        <!--</a>-->
+    </div>
+    <% }); %>
+
+<% include partials/footer.ejs %>
