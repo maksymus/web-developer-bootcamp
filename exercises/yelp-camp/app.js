@@ -68,8 +68,9 @@ app.get("/campgrounds/:id", function (req, res) {
 app.post("/campgrounds", function (req, res) {
     var name = req.body.name;
     var image = req.body.image;
+    var description = req.body.description;
 
-    var cg = new Campground({name: name, image: image});
+    var cg = new Campground({name: name, image: image, description: description});
     cg.save(function (err, res) {
         if (err) {
             console.log("error:", err);
