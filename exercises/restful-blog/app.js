@@ -1,12 +1,14 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
+var methodOverride = require("method-override");
 
 mongoose.connect('mongodb://localhost:32772/restful-blog');
 
 var app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 var blogSchema = mongoose.Schema({
     title: String,
@@ -18,7 +20,7 @@ var blogSchema = mongoose.Schema({
 var Blog = mongoose.model("Blog", blogSchema);
 
 // var blogs = [
-//     {title: "Test Blog", image: "img/placeholder.jpg", body: "Hello this is a blog post"}
+//     {title: "Test Blog", image: "/img/placeholder.jpg", body: "Hello this is a blog post"}
 // ];
 //
 // blogs.forEach(function (blog) {
@@ -58,6 +60,36 @@ app.post("/blogs", function (req, res) {
             res.redirect("/blogs");
         }
     })
+});
+
+app.get("/blogs/:id", function (req, res) {
+    Blog.findOne({_id: req.params.id}, function (err, blog) {
+        if (err) {
+            console.log("error:", err);
+        } else {
+            res.render("blogs_show.ejs", {blog: blog});
+        }
+    });
+});
+
+app.get("/blogs/:id/edit", function (req, res) {
+    Blog.findOne({_id: req.params.id}, function (err, blog) {
+        if (err) {
+            console.log("error:", err);
+        } else {
+            res.render("blogs_edit.ejs", {blog: blog});
+        }
+    });
+});
+
+app.put("/blogs/:id", function (req, res) {
+    Blog.findOneAndUpdate({_id: req.params.id}, req.body.blog, function (err, blog) {
+        if (err) {
+            console.log("error:", err);
+        } else {
+            res.redirect("/blogs/" + blog.id);
+        }
+    });
 });
 
 app.listen(3000, function () {
