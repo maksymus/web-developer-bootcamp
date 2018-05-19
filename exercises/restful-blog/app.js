@@ -92,6 +92,16 @@ app.put("/blogs/:id", function (req, res) {
     });
 });
 
+app.delete("/blogs/:id", function (req, res) {
+    Blog.findOneAndRemove({_id: req.params.id}, req.body.blog, function (err, blog) {
+        if (err) {
+            console.log("error:", err);
+        } else {
+            res.redirect("/blogs/");
+        }
+    });
+})
+
 app.listen(3000, function () {
     console.log("server is listening");
 });

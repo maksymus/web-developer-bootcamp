@@ -14,7 +14,10 @@
             </div>
         </div>
         <div class="item">
-            <a class="ui button blue" href="/blogs/<%= blog.id %>/edit">Edit</a>
+            <form action="/blogs/<%= blog.id %>?_method=delete" method="post" class="ui form">
+                <a class="ui button blue" href="/blogs/<%= blog.id %>/edit">Edit</a>
+                <button class="ui button red">Delete</button>
+            </form>
         </div>
     </div>
 
