@@ -1,0 +1,17 @@
+<% include ../partials/header.ejs %>
+
+<div class="container">
+    <h1><%= campground.name %></h1>
+    <img src="<%= campground.image %>" alt="<%= campground.image %>">
+    <p><%= campground.description %></p>
+
+    <% campground.comments.forEach(function (comment) { %>
+        <p>
+            <strong><%= comment.author %></strong> - <%= comment.text %>
+        </p>
+    <% }) %>
+
+    <a href="/campgrounds/<%= campground.id %>/comments/new" class="card-link btn btn-success">Add Comment</a>
+</div>
+
+<% include ../partials/footer.ejs %>
