@@ -1,11 +1,13 @@
 var express = require("express");
 var router = express.Router();
 
+var common = require("../common");
+
 var Campground      = require("../models/campground"),
     Comment         = require("../models/comment"),
     User            = require("../models/user");
 
-router.get("/campgrounds/:id/comments/new", isLoggeIn, function (req, res) {
+router.get("/campgrounds/:id/comments/new", common.isLoggeIn, function (req, res) {
     Campground.findOne({_id: req.params.id}).populate("comments").exec(function (err, campground) {
         if (err) {
             console.log("error:", err);
@@ -15,7 +17,7 @@ router.get("/campgrounds/:id/comments/new", isLoggeIn, function (req, res) {
     });
 });
 
-router.post("/campgrounds/:id/comments", isLoggeIn, function (req, res) {
+router.post("/campgrounds/:id/comments", common.isLoggeIn, function (req, res) {
     Campground.findOne({_id: req.params.id}).populate("comments").exec(function (err, campground) {
         if (err) {
             console.log("error:", err);
@@ -37,14 +39,5 @@ router.post("/campgrounds/:id/comments", isLoggeIn, function (req, res) {
     });
 });
 
-function isLoggeIn(req, res, next) {
-    console.log("User logged in: " + req.isAuthenticated());
-
-    if (req.isAuthenticated()) {
-        return next();
-    }
-
-    res.redirect("/login");
-}
 
 module.exports = router;

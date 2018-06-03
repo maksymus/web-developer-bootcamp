@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
+var common = require("../common");
+
 var Campground      = require("../models/campground"),
     Comment         = require("../models/comment"),
     User            = require("../models/user");
@@ -15,7 +17,7 @@ router.get("/campgrounds", function (req, res) {
     });
 });
 
-router.get("/campgrounds/new", function (req, res) {
+router.get("/campgrounds/new", common.isLoggeIn, function (req, res) {
     res.render("campgrounds/new.ejs");
 });
 
@@ -29,7 +31,7 @@ router.get("/campgrounds/:id", function (req, res) {
     });
 });
 
-router.post("/campgrounds", function (req, res) {
+router.post("/campgrounds", common.isLoggeIn, function (req, res) {
     var name = req.body.name;
     var image = req.body.image;
     var description = req.body.description;
